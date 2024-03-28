@@ -9,6 +9,14 @@ public class ArrayStack<T> {
         array = new Object[DEFAULT_CAPACITY];
         size = 0;
     }
+    
+    public ArrayStack(int initialCapacity) {
+        if (initialCapacity <= 0) {
+            throw new IllegalArgumentException("Initial capacity must be positive");
+        }
+        array = new Object[initialCapacity];
+        size = 0;
+    }
 
     public void push(T item) {
         if (size == array.length) {
