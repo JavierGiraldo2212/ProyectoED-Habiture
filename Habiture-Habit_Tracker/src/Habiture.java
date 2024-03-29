@@ -7,7 +7,7 @@ public class Habiture {
         NodeStack<Integer> stack = new NodeStack<>();
 
         // Push elements onto the stack
-        stack.push(10);
+        stack.push(15);
         stack.push(20);
         stack.push(30);
         stack.push(100);
@@ -18,6 +18,7 @@ public class Habiture {
 
         // Peek at the top element of the stack
         System.out.println(stack.peek()); // Output: 20
+        System.out.println(stack.pop()); // Output: 20
         System.out.println(stack.pop()); // Output: 20
     }
 
