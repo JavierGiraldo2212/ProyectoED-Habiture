@@ -69,14 +69,14 @@ public class Actividad implements Comparable<Actividad>{
         this.descripcion = descripcion;
     }
 
-    @Override
+    
     // Comparar por importancia
-    public int compareTo(Actividad otraActividad) {
+    public int compararPorImportancia(Actividad otraActividad) {
         return Integer.compare(this.nivelImportancia, otraActividad.nivelImportancia);
     }
 
     // Comparar por fecha y hora si la fecha es la misma
-    public int compararPorFecha(Actividad otraActividad) {
+    public int compareTo(Actividad otraActividad) {
         int comparacionFecha = this.fecha.compareTo(otraActividad.fecha);
         if (comparacionFecha == 0) {// Si las fechas son iguales, comparar por hora
             return this.hora.compareTo(otraActividad.hora);

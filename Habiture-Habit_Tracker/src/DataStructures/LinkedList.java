@@ -1,12 +1,14 @@
 package DataStructures;
 
-public class LinkedList<T> {
+public class LinkedList<T extends Comparable<T>>{
     private Node<T> head;
     private Node<T> tail;
+    private int size;
 
     public LinkedList() {
         this.head = null;
         this.tail = null;
+        size = 0;
     }
 
 
@@ -20,6 +22,7 @@ public class LinkedList<T> {
             newNode.setNext(head);
             head = newNode;
         }
+        size ++;
     }
 
     // Método para agregar un nuevo nodo al final de la lista
@@ -32,27 +35,31 @@ public class LinkedList<T> {
             tail.setNext(newNode);
             tail = newNode;
         }
+        size ++;
     }
 
-    // Método para agregar un nuevo nodo en una posición específica de la lista
-    public void addAtIndex(int index, T data) {
-        if (index < 0 || index > size()) {
-            throw new IndexOutOfBoundsException("Índice fuera de rango");
-        }
-        if (index == 0) {
-            addFirst(data);
-        } else if (index == size()) {
-            addLast(data);
+    public void add(T data) {
+        Node<T> newNode = new Node<>(data);
+        if (isEmpty()) {
+            head = newNode;
+            tail = newNode;
+        } else if (head.getData().compareTo(data) > 0) { // El nuevo dato es menor que el primer dato en la lista
+            newNode.setNext(head);
+            head = newNode;
         } else {
-            Node<T> newNode = new Node<>(data);
             Node<T> current = head;
-            for (int i = 0; i < index - 1; i++) {
+            while (current.getNext() != null && current.getNext().getData().compareTo(data) < 0) {
                 current = current.getNext();
             }
             newNode.setNext(current.getNext());
             current.setNext(newNode);
+            if (newNode.getNext() == null) { // Si el nuevo nodo es el último, actualizamos la cola
+                tail = newNode;
+            }
         }
+        size++;
     }
+
 
     // Método para eliminar el primer nodo de la lista
     public void removeFirst() {
@@ -64,6 +71,7 @@ public class LinkedList<T> {
                 head = head.getNext();
             }
         }
+        size --;
     }
 
     // Método para eliminar el último nodo de la lista
@@ -81,25 +89,9 @@ public class LinkedList<T> {
                 tail = current;
             }
         }
+        size --;
     }
 
-    // Método para eliminar el nodo en una posición específica de la lista
-    public void removeAtIndex(int index) {
-        if (index < 0 || index >= size()) {
-            throw new IndexOutOfBoundsException("Índice fuera de rango");
-        }
-        if (index == 0) {
-            removeFirst();
-        } else if (index == size() - 1) {
-            removeLast();
-        } else {
-            Node<T> current = head;
-            for (int i = 0; i < index - 1; i++) {
-                current = current.getNext();
-            }
-            current.setNext(current.getNext().getNext());
-        }
-    }
 
     // Método para eliminar el primer nodo que contiene un valor específico
     public void remove(T data) {
@@ -121,6 +113,7 @@ public class LinkedList<T> {
             }
             current = current.getNext();
         }
+        size --;
     }
 
     
@@ -142,7 +135,7 @@ public class LinkedList<T> {
 
     // Método para obtener el dato almacenado en una posición específica de la lista
     public T getAtIndex(int index) {
-        if (index < 0 || index >= size()) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Índice fuera de rango");
         }
         Node<T> current = head;
@@ -157,15 +150,8 @@ public class LinkedList<T> {
         return head == null;
     }
 
-    // Método para obtener el número de elementos en la lista
-    public int size() {
-        int count = 0;
-        Node<T> current = head;
-        while (current != null) {
-            count++;
-            current = current.getNext();
-        }
-        return count;
+    public int getSize() {
+    	return size;
     }
 
     // Método para eliminar todos los elementos de la lista
@@ -173,5 +159,19 @@ public class LinkedList<T> {
         head = null;
         tail = null;
     }
+    
+    public void printRecursive() {
+        printRecursive(head);
+    }
+
+    private void printRecursive(Node<T> current) {
+        if (current == null) {
+            System.out.println();
+            return;
+        }
+        System.out.println(current.getData() + " ");
+        printRecursive(current.getNext());
+    }
+
     
 }
