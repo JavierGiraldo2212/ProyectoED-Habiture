@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Actividad {
+public class Actividad implements Comparable<Actividad>{
     // Atributos obligatorios
     private String nombre;
     private LocalDate fecha;
@@ -16,6 +16,7 @@ public class Actividad {
         this.nombre = nombre;
         this.fecha = fecha;
         this.nivelImportancia = nivelImportancia;
+        this.hora = LocalTime.of(23,59);	// Hora estandar 23:59
     }
 
     // Constructor para todos los atributos
@@ -68,6 +69,21 @@ public class Actividad {
         this.descripcion = descripcion;
     }
 
+    @Override
+    // Comparar por importancia
+    public int compareTo(Actividad otraActividad) {
+        return Integer.compare(this.nivelImportancia, otraActividad.nivelImportancia);
+    }
+
+    // Comparar por fecha y hora si la fecha es la misma
+    public int compararPorFecha(Actividad otraActividad) {
+        int comparacionFecha = this.fecha.compareTo(otraActividad.fecha);
+        if (comparacionFecha == 0) {// Si las fechas son iguales, comparar por hora
+            return this.hora.compareTo(otraActividad.hora);
+        }
+        return comparacionFecha;
+    }
+    
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Nombre: ").append(nombre);
