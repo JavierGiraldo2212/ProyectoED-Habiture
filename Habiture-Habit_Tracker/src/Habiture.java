@@ -1,25 +1,30 @@
 import DataStructures.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Habiture {
 
 	public static void main(String[] args) {
-        // Create a NodeStack instance
-        NodeStack<Integer> stack = new NodeStack<>();
+        
 
-        // Push elements onto the stack
-        stack.push(15);
-        stack.push(20);
-        stack.push(30);
-        stack.push(100);
-
-        // Pop elements from the stack
-        System.out.println(stack.pop());  // Output: 100
-        System.out.println(stack.pop());  // Output: 30
-
-        // Peek at the top element of the stack
-        System.out.println(stack.peek()); // Output: 20
-        System.out.println(stack.pop()); // Output: 20
-        System.out.println(stack.pop()); // Output: 20
+        Actividad actividad1 = new Actividad("Hacer ejercicio", LocalDate.now(), 3);
+        Actividad actividad2 = new Actividad("Estudiar programación", LocalDate.of(2024, 3, 30), 2,
+        		LocalTime.of(14, 0), "Repasar Estructuras de datos");
+        
+        
+        
+        NodeStack<Actividad> stackActividades = new NodeStack<>();
+        stackActividades.push(actividad2);
+        stackActividades.push(actividad1);
+        
+        System.out.println(stackActividades.pop());
+        System.out.println(stackActividades.pop());
+        System.out.println(stackActividades.pop());
+        
+        stackActividades.push(actividad1);
+        System.out.println(stackActividades.pop());
+        
+        
     }
 
 }
