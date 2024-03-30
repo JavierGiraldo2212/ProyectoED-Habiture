@@ -61,5 +61,4 @@ public class Array<T> {
         array = newArray;
     }
 
-    // Otros métodos de la clase Array
 }

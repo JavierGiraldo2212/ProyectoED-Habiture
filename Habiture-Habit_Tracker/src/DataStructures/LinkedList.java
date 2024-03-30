@@ -12,32 +12,6 @@ public class LinkedList<T extends Comparable<T>>{
     }
 
 
-    // Método para agregar un nuevo nodo al principio de la lista
-    public void addFirst(T data) {
-        Node<T> newNode = new Node<>(data);
-        if (isEmpty()) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            newNode.setNext(head);
-            head = newNode;
-        }
-        size ++;
-    }
-
-    // Método para agregar un nuevo nodo al final de la lista
-    public void addLast(T data) {
-        Node<T> newNode = new Node<>(data);
-        if (isEmpty()) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            tail.setNext(newNode);
-            tail = newNode;
-        }
-        size ++;
-    }
-
     public void add(T data) {
         Node<T> newNode = new Node<>(data);
         if (isEmpty()) {
@@ -60,6 +34,14 @@ public class LinkedList<T extends Comparable<T>>{
         size++;
     }
 
+    public T popFront() {
+        if (isEmpty()) {
+            throw new IllegalStateException("The list is empty");
+        }
+        T data = head.getData();
+        removeFirst();
+        return data;
+    }
 
     // Método para eliminar el primer nodo de la lista
     public void removeFirst() {
@@ -133,17 +115,6 @@ public class LinkedList<T extends Comparable<T>>{
         return tail.getData();
     }
 
-    // Método para obtener el dato almacenado en una posición específica de la lista
-    public T getAtIndex(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Índice fuera de rango");
-        }
-        Node<T> current = head;
-        for (int i = 0; i < index; i++) {
-            current = current.getNext();
-        }
-        return current.getData();
-    }
 
     // Método para verificar si la lista está vacía
     public boolean isEmpty() {

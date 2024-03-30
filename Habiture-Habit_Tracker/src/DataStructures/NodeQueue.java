@@ -69,4 +69,17 @@ public class NodeQueue<T> {
         tail = null;
     }
     
+    public void printQueue() {
+        printQueueRecursive(head);
+    }
+
+    private void printQueueRecursive(Node<T> current) {
+        if (current == null) {
+            System.out.println();
+            return;
+        }
+        System.out.println(current.getData() + " ");
+        printQueueRecursive(current.getNext());
+    }
+    
 }
