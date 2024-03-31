@@ -25,22 +25,84 @@ public class TEST {
         return actividad;
     }
     
-    public long testDo_undo(int No, NodeStack<Actividad> Historial, 
+    public void testDo_undo(int No, NodeStack<Actividad> Historial,
             LinkedList<Actividad> actividades, Funcion fn) {
-        
-        for(int num = 1; num <= No; num++) actividades.add(generador(num));
-        System.out.println(actividades.getSize());
-        
-        long startTime = System.nanoTime(); // Guarda el tiempo de inicio
-        for(int num = 1; num <= No; num++) fn.Done(Historial, actividades);
-        System.out.println(actividades.getSize());
-        for(int num = 1; num <= No; num++) fn.UnDone(Historial, actividades);
-        System.out.println(actividades.getSize());
-        
-        long endTime = System.nanoTime(); // Guarda el tiempo de finalización
-        
-        return endTime - startTime;
+
+        // Generar actividades
+        Actividad[] actividadesGeneradas = new Actividad[No];
+        for (int num = 1; num <= No; num++) {
+            actividadesGeneradas[num - 1] = generador(num);
+        }
+
+        long t1 = System.nanoTime();
+        for (int num = 0; num < No; num++) {
+            actividades.add(actividadesGeneradas[num]);
+        }
+        long tiempoInsercion = System.nanoTime() - t1;
+        System.out.println("Tiempo de guardado: " + tiempoInsercion);
+        //System.out.println(actividades.getSize());
+
+        t1 = System.nanoTime();
+        for (int num = 0; num < No; num++) {
+            fn.Done(Historial, actividades);
+        }
+        System.out.println("Tiempo de Done: " + (System.nanoTime() - t1));
+        //System.out.println(actividades.getSize());
+
+        t1 = System.nanoTime();
+        for (int num = 0; num < No; num++) {
+            fn.UnDone(Historial, actividades);
+        }
+        System.out.println("Tiempo de UnDone: " + (System.nanoTime() - t1));
+        //System.out.println(actividades.getSize());
     }
 
-    
+    public static void TestComparadores() {
+        Actividad actividad1 = new Actividad("Hacer ejercicio", LocalDate.now(), 3);
+        Actividad actividad2 = new Actividad("Estudiar programación", LocalDate.of(2024, 3, 29), 2,
+                LocalTime.of(14, 0), "Repasar Estructuras de datos");
+        Actividad actividad3 = new Actividad("Hacer ejercicio", LocalDate.now(), 3);
+        Actividad actividad4 = new Actividad("Estudiar programación", LocalDate.of(2024, 3, 29), 2,
+                LocalTime.of(14, 0), "Repasar Estructuras de datos");
+        Actividad actividad5 = new Actividad("Estudiar programación", LocalDate.of(2024, 3, 29), 2,
+                LocalTime.of(15, 0), "Repasar Estructuras de datos");
+
+        System.out.println(actividad1.compareTo(actividad2));
+        System.out.println(actividad2.compareTo(actividad1));
+        System.out.println(actividad1.compareTo(actividad3));
+
+        System.out.println();
+
+        System.out.println(actividad4.compararPorImportancia(actividad5));
+        System.out.println(actividad5.compararPorImportancia(actividad4));
+        System.out.println(actividad5.compararPorImportancia(actividad5));
+    }
+
+    public static void TestStack() {
+
+        Actividad actividad1 = new Actividad("Hacer ejercicio", LocalDate.now(), 3);
+        Actividad actividad2 = new Actividad("Estudiar programación", LocalDate.of(2024, 3, 29), 2,
+                LocalTime.of(14, 0), "Repasar Estructuras de datos");
+        Actividad actividad3 = new Actividad("Hacer ejercicio", LocalDate.now(), 3);
+        Actividad actividad4 = new Actividad("Estudiar programación", LocalDate.of(2024, 3, 29), 2,
+                LocalTime.of(14, 0), "Repasar Estructuras de datos");
+        Actividad actividad5 = new Actividad("Estudiar programación", LocalDate.of(2024, 3, 29), 2,
+                LocalTime.of(15, 0), "Repasar Estructuras de datos");
+
+        NodeStack<Actividad> stackActividades = new NodeStack<>();
+        stackActividades.push(actividad1);
+        stackActividades.push(actividad2);
+        stackActividades.push(actividad3);
+        stackActividades.push(actividad4);
+        stackActividades.push(actividad5);
+
+        System.out.println(stackActividades.pop());
+        System.out.println(stackActividades.pop());
+        System.out.println(stackActividades.pop());
+        System.out.println(stackActividades.pop());
+        System.out.println(stackActividades.pop());
+
+        System.out.println();
+    }
+
 }
