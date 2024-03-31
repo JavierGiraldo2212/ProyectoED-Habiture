@@ -7,12 +7,18 @@ public class Habiture {
 	public static void main(String[] args) {
        
 		Funcion fn = new Funcion();
+		TEST test = new TEST();
+		int max = 100000;
+		
 		
 		LinkedList<Actividad> actividades = new LinkedList<>(); // La lista enlazada ordena de menor a mayor según la fecha
 		NodeStack<Actividad> Historial = new NodeStack<>();
-		NodeQueue<Actividad> Programacion = new NodeQueue<>();
 		
+		System.out.println("Prueba para el generador aleatorio");
+		long tiempo = test.testDo_undo(max, Historial, actividades, fn);
+		System.out.println("Tiempo en ejecución: "+tiempo);// tiempo en nano segundos
 		
+	/* 	
 		Actividad actividad1 = new Actividad("Hacer ejercicio", LocalDate.now(), 3);
         Actividad actividad2 = new Actividad("Estudiar programación", LocalDate.of(2024, 3, 28), 2,
         		LocalTime.of(14, 0), "Repasar Estructuras de datos");
@@ -41,9 +47,8 @@ public class Habiture {
         fn.UnDone(Historial, actividades);
         System.out.println("Lista actualizada");
         actividades.printRecursive();
-        
-        
-        
+    */
+
         
     }
 
