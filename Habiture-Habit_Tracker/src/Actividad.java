@@ -19,6 +19,23 @@ public class Actividad implements Comparable<Actividad>{
         this.hora = LocalTime.of(23,59);	// Hora estandar 23:59
     }
 
+    // Constructor para todos los atributos menos descripcion
+    public Actividad(String nombre, LocalDate fecha, int nivelImportancia, LocalTime hora) {
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.nivelImportancia = nivelImportancia;
+        this.hora = hora;
+    }
+
+    // Constructor para todos los atributos menos hora
+    public Actividad(String nombre, LocalDate fecha, int nivelImportancia, String descripcion) {
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.nivelImportancia = nivelImportancia;
+        this.descripcion = descripcion;
+        this.hora = LocalTime.of(23, 59);
+    }
+
     // Constructor para todos los atributos
     public Actividad(String nombre, LocalDate fecha, int nivelImportancia, LocalTime hora, String descripcion) {
         this.nombre = nombre;
