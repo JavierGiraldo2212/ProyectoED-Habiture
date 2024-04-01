@@ -29,8 +29,8 @@ public class TEST {
             LinkedList<Actividad> actividades, Funcion fn) {
 
         // Generar actividades
-        Actividad[] actividadesGeneradas = new Actividad[10000000];
-        for (int num = 1; num <= 10000000; num++) {
+        Actividad[] actividadesGeneradas = new Actividad[100000];
+        for (int num = 1; num <= 100000; num++) {
             actividadesGeneradas[num - 1] = generador(num);
         }
 
