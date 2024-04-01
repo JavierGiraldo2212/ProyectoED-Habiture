@@ -12,14 +12,17 @@ public class Habiture {
 		LinkedList<Actividad> actividades = new LinkedList<>(); // La lista enlazada ordena de menor a mayor según la fecha
 		NodeStack<Actividad> Historial = new NodeStack<>();
 		
+        test.testDo_undo(Historial, actividades, fn);
+
+        /* 
         for(int i = 10000; i<=100000000; i*=10){
             System.out.println("Prueba para " + i + " muestras");
             for(int j = 1; j<=25; j++){
                 System.out.println("Prueba #"+j);
-                test.testDo_undo(max, Historial, actividades, fn);
+                test.testDo_undo(i, Historial, actividades, fn);
             } 
             System.out.println("------------");
-        }
+        }*/
         
     }
 

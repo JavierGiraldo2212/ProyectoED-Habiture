@@ -25,36 +25,39 @@ public class TEST {
         return actividad;
     }
     
-    public void testDo_undo(int No, NodeStack<Actividad> Historial,
+    public void testDo_undo( NodeStack<Actividad> Historial,
             LinkedList<Actividad> actividades, Funcion fn) {
 
         // Generar actividades
-        Actividad[] actividadesGeneradas = new Actividad[No];
-        for (int num = 1; num <= No; num++) {
+        Actividad[] actividadesGeneradas = new Actividad[10000000];
+        for (int num = 1; num <= 10000000; num++) {
             actividadesGeneradas[num - 1] = generador(num);
         }
 
-        long t1 = System.nanoTime();
-        for (int num = 0; num < No; num++) {
-            actividades.add(actividadesGeneradas[num]);
-        }
-        long tiempoInsercion = System.nanoTime() - t1;
-        System.out.println("Tiempo de guardado: " + tiempoInsercion);
-        //System.out.println(actividades.getSize());
+        for(int No = 10; No<=1000000; No*=10){
+            System.out.print("#"+No + ",");
+            long t1 = System.nanoTime();
+            for (int num = 0; num < No; num++) {
+                actividades.add(actividadesGeneradas[num]);
+            }
+            System.out.print((System.nanoTime() - t1)+",");
 
-        t1 = System.nanoTime();
-        for (int num = 0; num < No; num++) {
-            fn.Done(Historial, actividades);
-        }
-        System.out.println("Tiempo de Done: " + (System.nanoTime() - t1));
-        //System.out.println(actividades.getSize());
+            t1 = System.nanoTime();
+            for (int num = 0; num < No; num++) {
+                fn.Done(Historial, actividades);
+            }
+            System.out.print((System.nanoTime() - t1) + ",");
 
-        t1 = System.nanoTime();
-        for (int num = 0; num < No; num++) {
-            fn.UnDone(Historial, actividades);
+            t1 = System.nanoTime();
+            for (int num = 0; num < No; num++) {
+                fn.UnDone(Historial, actividades);
+            }
+            System.out.println((System.nanoTime() - t1));
+            Historial.clear();
+            actividades.clear();
         }
-        System.out.println("Tiempo de UnDone: " + (System.nanoTime() - t1));
-        //System.out.println(actividades.getSize());
+
+        
     }
 
     public static void TestComparadores() {
