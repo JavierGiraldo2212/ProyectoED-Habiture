@@ -28,4 +28,8 @@ public class NodeStack<T> {
     public boolean isEmpty() {
         return top == null;
     }
+    
+    public void clear() {
+        top = null;
+    }
 }
