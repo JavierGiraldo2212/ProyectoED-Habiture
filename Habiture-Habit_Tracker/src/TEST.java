@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 
 import DataStructures.LinkedList;
 import DataStructures.NodeStack;
@@ -59,6 +61,49 @@ public class TEST {
 
         
     }
+
+
+    public void testUpdtDlt(LinkedList<Actividad> actividades, Funcion fn) {
+
+        // Generar actividades
+        Actividad[] actividadesGeneradas = new Actividad[100000];
+        for (int num = 1; num <= 100000; num++) {
+            actividadesGeneradas[num - 1] = generador(num);
+        }
+
+        for(int No = 10; No<=1000000; No*=10){
+            System.out.print("#"+No + ",");
+            long t1 = System.nanoTime();
+            for (int num = 0; num < No; num++) {
+                actividades.add(actividadesGeneradas[num]);
+            }
+            System.out.print((System.nanoTime() - t1)+",");
+
+            t1 = System.nanoTime();
+            for (int num = 0; num < No; num++) {
+                int randomNum = ThreadLocalRandom.current().nextInt(1, No);
+                String actividadName = "Actividad " + randomNum;
+
+                int newRandomNum = ThreadLocalRandom.current().nextInt(1, No);
+                String newActividadName = "Actividad " + randomNum;
+                String newDescription = "nueva descripcion " + newRandomNum;
+                fn.updateActividad(actividadName, newActividadName, newDescription, actividades);
+            }
+            System.out.print((System.nanoTime() - t1) + ",");
+
+            t1 = System.nanoTime();
+            for (int num = 0; num < No; num++) {
+                int randomNum = ThreadLocalRandom.current().nextInt(1, No);
+                String actividadName = "Actividad " + randomNum;
+                fn.removeActividad(actividadName, actividades);
+            }
+            System.out.println((System.nanoTime() - t1));
+            actividades.clear();
+        }
+
+        
+    }
+
 
     public static void TestComparadores() {
         Actividad actividad1 = new Actividad("Hacer ejercicio", LocalDate.now(), 3);

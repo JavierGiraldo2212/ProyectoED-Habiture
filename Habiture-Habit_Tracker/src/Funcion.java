@@ -28,11 +28,14 @@ public class Funcion {
 
 
 	// Metodo auxiliar para encontrar una actividad por el nombre
+    
     private Actividad findActividadByName(String name, LinkedList<Actividad> actividades) {
-        for (Actividad actividad : actividades) {
+        for (int num = 1; num <= actividades.getSize(); num++) {
+            Actividad actividad = actividades.getFirst();
             if (actividad.getNombre().equals(name)) {
                 return actividad;
             }
+            actividades.removeFirst();
         }
         return null; // Actividad no encontrada
     }
@@ -43,9 +46,9 @@ public class Funcion {
         if (ActividadToUpdate != null) {
             ActividadToUpdate.setNombre(newName);
             ActividadToUpdate.setDescripcion(newDescription);
-        } else {
-            System.out.println("Actividad no encontrada.");
-        }
+        } //else {
+        //    System.out.println("Actividad no encontrada.");
+        //}
     }
 
     // Remover una actividad
@@ -53,9 +56,9 @@ public class Funcion {
         Actividad ActividadToRemove = findActividadByName(name, actividades);
         if (ActividadToRemove != null) {
             actividades.remove(ActividadToRemove);
-        } else {
-            System.out.println("Actividad no encontrada.");
-        }
+        } //else {
+        //    System.out.println("Actividad no encontrada.");
+        //}
     }
 
     

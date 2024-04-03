@@ -1,6 +1,9 @@
 import DataStructures.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.ThreadLocalRandom;
+
 
 public class Habiture {
 
@@ -8,11 +11,15 @@ public class Habiture {
        
 		Funcion fn = new Funcion(); TEST test = new TEST();
 		int max = 100;
+
 		
 		LinkedList<Actividad> actividades = new LinkedList<>(); // La lista enlazada ordena de menor a mayor según la fecha
 		NodeStack<Actividad> Historial = new NodeStack<>();
 		
-        test.testDo_undo(Historial, actividades, fn);        
+        //test.testDo_undo(Historial, actividades, fn);
+		
+		test.testUpdtDlt(actividades, fn);
+
     }
 
 }
